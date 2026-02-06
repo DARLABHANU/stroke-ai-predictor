@@ -22,14 +22,21 @@ function App() {
   };
 
   const submit = async () => {
-  const res = await fetch(
-  "https://stroke-risk-prediction-and-early.onrender.com",
-  {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(form)
-  }
-);
+    const payload = {
+      ...form,
+      age: form.age === "" ? undefined : Number(form.age),
+      hypertension: Number(form.hypertension),
+      heart_disease: Number(form.heart_disease),
+      avg_glucose_level:
+        form.avg_glucose_level === "" ? undefined : Number(form.avg_glucose_level),
+      bmi: form.bmi === "" ? undefined : Number(form.bmi),
+    };
+
+    const res = await fetch("http://localhost:8000/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
 
     const data = await res.json();
