@@ -32,7 +32,7 @@ function App() {
       bmi: form.bmi === "" ? undefined : Number(form.bmi),
     };
 
-    const res = await fetch("http://localhost:8000/predict", {
+    const res = await fetch("https://stroke-ai-predictor-u1j9.onrender.com/predict", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
